@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Dog Care</string>
+    <string name="splash_icon_description">Dog Care paw icon</string>
+    <string name="events">Events</string>
+    <string name="fab_description">Add New Event Floating Action Button</string>
+    <string name="new_event">New Event</string>
+    <string name="save">Save</string>
+</resources>
