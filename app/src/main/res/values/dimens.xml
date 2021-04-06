@@ -3,4 +3,9 @@
     <dimen name="splash_text_margin">16dp</dimen>
     <dimen name="splash_icon_height">120dp</dimen>
     <dimen name="splash_text_size">48sp</dimen>
+    <dimen name="cardview_photo_width">64dp</dimen>
+    <dimen name="cardview_photo_height">64dp</dimen>
+    <dimen name="new_event_text_height">48dp</dimen>
+    <dimen name="new_event_text_paddingStart">24dp</dimen>
+    <dimen name="new_event_text_paddingTop">12dp</dimen>
 </resources>

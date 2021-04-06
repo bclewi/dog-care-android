@@ -8,6 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.example.dogcare.Adapter.EventAdapter;
+import com.example.dogcare.Dialog.DialogCloseListener;
+import com.example.dogcare.Dialog.NewEventDialog;
+import com.example.dogcare.Model.EventModel;
+import com.example.dogcare.Utility.DatabaseHelper;
+import com.example.dogcare.Utility.RecyclerViewTouchHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
@@ -16,10 +22,8 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements DialogCloseListener {
 
-    private DatabaseHandler db;
-    private RecyclerView eventRecyclerView;
+    private DatabaseHelper db;
     private EventAdapter eventAdapter;
-    private FloatingActionButton fab;
     private List<EventModel> eventList;
 
     @Override
@@ -28,26 +32,26 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         setContentView(R.layout.activity_main);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        db = new DatabaseHandler(this);
+        db = new DatabaseHelper(this);
         db.openDatabase();
 
-        eventRecyclerView = findViewById(R.id.eventRecyclerView);
+        RecyclerView eventRecyclerView = findViewById(R.id.eventRecyclerView);
         eventRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         eventAdapter = new EventAdapter(db,MainActivity.this);
         eventRecyclerView.setAdapter(eventAdapter);
 
         ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new RecyclerItemTouchHelper(eventAdapter));
+                ItemTouchHelper(new RecyclerViewTouchHelper(eventAdapter));
         itemTouchHelper.attachToRecyclerView(eventRecyclerView);
 
         eventList = db.getAllEvents();
         Collections.reverse(eventList);
         eventAdapter.setEvents(eventList);
 
-        fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v ->
-                AddNewEvent.newInstance().show(getSupportFragmentManager(),
-                        AddNewEvent.TAG)
+                NewEventDialog.newInstance().show(getSupportFragmentManager(),
+                        NewEventDialog.TAG)
         );
     }
 

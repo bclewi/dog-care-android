@@ -1,4 +1,4 @@
-package com.example.dogcare;
+package com.example.dogcare.Utility;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,18 +12,25 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
+import com.example.dogcare.Adapter.EventAdapter;
+import com.example.dogcare.R;
 
-    private EventAdapter adapter;
+public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
 
-    public RecyclerItemTouchHelper(EventAdapter adapter) {
+    private final EventAdapter adapter;
+
+    public RecyclerViewTouchHelper(EventAdapter adapter) {
         super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
     }
 
 
     @Override
-    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+    public boolean onMove(
+            @NonNull RecyclerView recyclerView,
+            @NonNull RecyclerView.ViewHolder viewHolder,
+            @NonNull RecyclerView.ViewHolder target
+    ) {
         return false;
     }
 
@@ -64,10 +71,13 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         int backgroundCornerOffset = 20;
 
         if (dX > 0) {
-            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_edit);
-            background = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.design_default_color_primary_dark));
+            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_edit_white);
+            background = new ColorDrawable(ContextCompat.getColor(
+                    adapter.getContext(),
+                    R.color.design_default_color_primary_dark
+                    ));
         } else {
-            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_delete);
+            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_delete_white);
             background = new ColorDrawable(Color.RED);
         }
 

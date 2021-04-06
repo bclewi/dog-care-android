@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/dogNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[Dog name]"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/eventTypeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" [event]"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/eventDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" on [Date]"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/eventTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" at [Time]"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/eventNotesTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:text="Notes"
+            android:textColor="@color/gray"/>
+
+        <CheckBox
+            android:id="@+id/eventCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/orange_700"
+            android:paddingStart="8dp"
+            tools:text="Check me" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

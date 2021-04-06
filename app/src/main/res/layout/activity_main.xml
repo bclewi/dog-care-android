@@ -35,7 +35,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="32dp"
         android:backgroundTint="@color/orange_700"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_add_white"
         android:contentDescription="@string/fab_description" />
 
 </RelativeLayout>
