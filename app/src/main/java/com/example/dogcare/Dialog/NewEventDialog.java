@@ -130,6 +130,12 @@ public class NewEventDialog extends BottomSheetDialogFragment {
 
             eventDateTime = bundle.getLong("eventDateTime");
 
+            eventYear = bundle.getInt("eventYear");
+            eventMonth = bundle.getInt("eventMonth");
+            eventDay = bundle.getInt("eventDay");
+            eventHour = bundle.getInt("eventHour");
+            eventMinute = bundle.getInt("eventMinute");
+
             updateSaveButton();
 
         }
@@ -236,9 +242,7 @@ public class NewEventDialog extends BottomSheetDialogFragment {
 
             Calendar cal = Calendar.getInstance(Locale.US);
             cal.set(eventYear, eventMonth, eventDay, eventHour, eventMinute);
-            // TODO fix below to stop returning negative long
             eventDateTime = cal.getTimeInMillis();
-
             if (hasNewUpdateFinal) { // if event update?
                 db.updateName(bundle.getInt("id"), dogNameInput);
                 db.updateType(bundle.getInt("id"), eventTypeInput);

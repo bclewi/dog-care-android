@@ -142,4 +142,30 @@ public class EventModel {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a", Locale.US);
         return " at "+sdf.format(date);
     }
+
+    public int getYear() {
+        final Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTimeInMillis(dateTime);
+        return cal.get(Calendar.YEAR);
+    }
+    public int getMonth() {
+        final Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTimeInMillis(dateTime);
+        return cal.get(Calendar.MONTH);
+    }
+    public int getDay() {
+        final Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTimeInMillis(dateTime);
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+    public int getHour() {
+        final Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTimeInMillis(dateTime);
+        return cal.get(Calendar.HOUR_OF_DAY);
+    }
+    public int getMinute() {
+        final Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTimeInMillis(dateTime);
+        return cal.get(Calendar.MINUTE);
+    }
 }

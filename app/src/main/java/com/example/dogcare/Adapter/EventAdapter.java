@@ -109,6 +109,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         bundle.putString("eventTime", event.getTime());
         bundle.putString("eventNotes", event.getNotes());
         bundle.putLong("eventDateTime", event.getDateTime());
+        bundle.putInt("eventYear", event.getYear());
+        bundle.putInt("eventMonth", event.getMonth());
+        bundle.putInt("eventDay", event.getDay());
+        bundle.putInt("eventHour", event.getHour());
+        bundle.putInt("eventMinute", event.getMinute());
         NewEventDialog dialog = new NewEventDialog();
         dialog.setArguments(bundle);
         dialog.show(activity.getSupportFragmentManager(), NewEventDialog.TAG);
