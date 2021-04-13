@@ -58,14 +58,6 @@
             android:text="Notes"
             android:textColor="@color/gray"/>
 
-        <CheckBox
-            android:id="@+id/eventCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/orange_700"
-            android:paddingStart="8dp"
-            tools:text="Check me" />
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

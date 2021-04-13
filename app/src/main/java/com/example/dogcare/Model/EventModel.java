@@ -8,7 +8,7 @@ import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class EventModel {
-    private int id, dogID, status;
+    private int id, dogID;
     private String dogName, type, notes;
     private long dateTime;
 
@@ -21,13 +21,6 @@ public class EventModel {
 
     public int getDogID() { return dogID; }
     public void setDogID(int dogID) { this.dogID = dogID; }
-
-    public int getStatus() {
-        return status;
-    }
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public String getDogName() {
         return dogName;

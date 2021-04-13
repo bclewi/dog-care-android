@@ -254,7 +254,6 @@ public class NewEventDialog extends BottomSheetDialogFragment {
                 event.setType(eventTypeInput);
                 event.setDateTime(eventDateTime);
                 event.setNotes(eventNotesInput);
-                event.setStatus(0);
                 db.insertEvent(event);
             }
             dismiss();

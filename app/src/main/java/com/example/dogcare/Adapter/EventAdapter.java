@@ -32,7 +32,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     public static class EventViewHolder extends RecyclerView.ViewHolder {
         TextView dogName, eventType, eventDateTextView, eventTimeTextView, eventNotes;
-        CheckBox checkBox;
 
         EventViewHolder(View view) {
             super(view);
@@ -41,7 +40,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             eventDateTextView = view.findViewById(R.id.eventDateTextView);
             eventTimeTextView = view.findViewById(R.id.eventTimeTextView);
             eventNotes = view.findViewById(R.id.eventNotesTextView);
-            checkBox = view.findViewById(R.id.eventCheckBox);
         }
     }
 
@@ -63,19 +61,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         viewHolder.eventDateTextView.setText(event.getDateText());
         viewHolder.eventTimeTextView.setText(event.getTimeText());
         viewHolder.eventNotes.setText(event.getNotes());
-        viewHolder.checkBox.setText(event.getType());
-        viewHolder.checkBox.setChecked(toBoolean(event.getStatus()));
-        viewHolder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                db.updateStatus(event.getId(), 1);
-            } else {
-                db.updateStatus(event.getId(), 0);
-            }
-        });
-    }
 
-    private boolean toBoolean(int n) {
-        return n != 0;
     }
 
     @Override
