@@ -17,7 +17,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int VERSION = 2;
+    private static final int VERSION = 3;
     private static final String NAME = "dogCareDatabase";
 
     private static final String EVENTS_TABLE = "events";
@@ -27,15 +27,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String EVENT_TYPE = "type"; // Ex: Walk, Poop, Eat, ...
     private static final String EVENT_DATE_TIME = "date_time";
     private static final String EVENT_NOTES = "notes";
-    private static final String EVENT_STATUS = "status"; // From to-do list app (1 = done, 0 = not)
     private static final String CREATE_EVENT_TABLE = "CREATE TABLE " + EVENTS_TABLE + "("
             + EVENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             //TODO + DOG_ID_FK + " INTEGER, "
             + DOG_NAME + " TEXT, "
             + EVENT_TYPE + " TEXT, "
             + EVENT_DATE_TIME + " LONG, "
-            + EVENT_NOTES + " TEXT, "
-            + EVENT_STATUS + " INTEGER)";
+            + EVENT_NOTES + " TEXT)";
 
     private static final String DOGS_TABLE = "dogs";
     private static final String DOG_ID = "id";
@@ -97,7 +95,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(EVENT_TYPE, event.getType());
         cv.put(EVENT_DATE_TIME, event.getDateTime());
         cv.put(EVENT_NOTES, event.getNotes());
-        cv.put(EVENT_STATUS, 0);
         try {
             db.insert(EVENTS_TABLE, null, cv);
         } catch (Exception e) {
@@ -121,7 +118,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         event.setType(cursor.getString(cursor.getColumnIndex(EVENT_TYPE)));
                         event.setDateTime(cursor.getLong(cursor.getColumnIndex(EVENT_DATE_TIME)));
                         event.setNotes(cursor.getString(cursor.getColumnIndex(EVENT_NOTES)));
-                        event.setStatus(cursor.getInt(cursor.getColumnIndex(EVENT_STATUS)));
                         eventList.add(event);
                     }
                     while(cursor.moveToNext());
@@ -185,16 +181,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void updateNotes(int id, String notes) {
         ContentValues cv = new ContentValues();
         cv.put(EVENT_NOTES, notes);
-        try {
-            db.update(EVENTS_TABLE, cv, EVENT_ID + "= ?", new String[] {String.valueOf(id)});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void updateStatus(int id, int status) {
-        ContentValues cv = new ContentValues();
-        cv.put(EVENT_STATUS, status);
         try {
             db.update(EVENTS_TABLE, cv, EVENT_ID + "= ?", new String[] {String.valueOf(id)});
         } catch (Exception e) {
