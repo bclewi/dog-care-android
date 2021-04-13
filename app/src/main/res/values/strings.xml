@@ -9,5 +9,11 @@
     <string name="event_type_hint">Event</string>
     <string name="event_date_hint">Date</string>
     <string name="event_time_hint">Time</string>
-    <string name="event_notes_hint">Notes (Optional)</string>
+    <string name="event_notes_hint">Notes (Optional)</string>\
+    <string-array name="events_array">
+        <item>Pooped</item>
+        <item>Peed</item>
+        <item>Walked</item>
+        <item>Fed</item>
+    </string-array>
 </resources>

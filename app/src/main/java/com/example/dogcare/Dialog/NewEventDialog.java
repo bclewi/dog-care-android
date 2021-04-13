@@ -8,16 +8,22 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.dogcare.Model.EventModel;
@@ -31,12 +37,12 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class NewEventDialog extends BottomSheetDialogFragment {
+public class NewEventDialog extends BottomSheetDialogFragment implements AdapterView.OnItemSelectedListener{
 
     public static final String TAG = "ActionBottomDialog";
     private EditText
             dogName,
-            eventType,
+            //eventType,
             eventNotes;
     private TextView
             eventDateTextView,
@@ -57,14 +63,18 @@ public class NewEventDialog extends BottomSheetDialogFragment {
 
     private DatabaseHelper db;
 
-    public static NewEventDialog newInstance(){
-        return new NewEventDialog();
-    }
+
+
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
+
+
+
     }
 
     @Nullable
@@ -78,8 +88,14 @@ public class NewEventDialog extends BottomSheetDialogFragment {
         return view;
     }
 
+
+
+    public static NewEventDialog newInstance(){
+        return new NewEventDialog();
+    }
+
     private void updateSaveButton() {
-        if (hasDogName.get() && hasEventType.get() && hasEventDate.get() && hasEventTime.get()) {
+        if (hasDogName.get() && hasEventDate.get() && hasEventTime.get()) {
             eventSaveButton.setEnabled(true);
             eventSaveButton.setTextColor(ContextCompat.getColor(
                     Objects.requireNonNull(getContext()),
@@ -97,8 +113,12 @@ public class NewEventDialog extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // added the spinner class
+        Spinner spinner = (Spinner) view.findViewById(R.id.staticSpinner);
+
+
         dogName = Objects.requireNonNull(getView()).findViewById(R.id.dogNameEditText);
-        eventType = Objects.requireNonNull(getView()).findViewById(R.id.eventTypeEditText);
+        //eventType = Objects.requireNonNull(getView()).findViewById(R.id.staticSpinner);
         eventDateTextView = Objects.requireNonNull(getView()).findViewById(R.id.eventDateTextView);
         eventTimeTextView = Objects.requireNonNull(getView()).findViewById(R.id.eventTimeTextView);
         eventNotes = Objects.requireNonNull(getView()).findViewById(R.id.eventNotesEditText);
@@ -113,10 +133,11 @@ public class NewEventDialog extends BottomSheetDialogFragment {
             String dogNameString = bundle.getString("dogName");
             dogName.setText(dogNameString);
             validateText(dogNameString, hasDogName);
-
-            String eventTypeString = bundle.getString("eventType");
-            eventType.setText(eventTypeString);
-            validateText(eventTypeString, hasEventType);
+            // commented out this to make it run as you cant get string from spinner with getstring
+            //
+           // String eventTypeString = spinner.getSelectedItem().toString();
+           // eventType.setText(eventTypeString);
+           // validateText(eventTypeString, hasEventType);
 
             String eventDateString = bundle.getString("eventDate");
             eventDateTextView.setText(eventDateString);
@@ -157,7 +178,7 @@ public class NewEventDialog extends BottomSheetDialogFragment {
             public void afterTextChanged(Editable s) { }
         });
 
-        eventType.addTextChangedListener(new TextWatcher() {
+       /* eventType.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
@@ -169,7 +190,7 @@ public class NewEventDialog extends BottomSheetDialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) { }
-        });
+        }); */
 
         // https://www.geeksforgeeks.org/datepickerdialog-in-android/
         // https://developer.android.com/guide/fragments/fragmentmanager
@@ -237,7 +258,9 @@ public class NewEventDialog extends BottomSheetDialogFragment {
         final boolean hasNewUpdateFinal = hasNewUpdate;
         eventSaveButton.setOnClickListener(v -> {
             String dogNameInput = dogName.getText().toString();
-            String eventTypeInput = eventType.getText().toString();
+            //below is the way to get the new string from the spinner to add to database
+            String eventTypeInput  = spinner.getSelectedItem().toString();
+            //String eventTypeInput = eventType.getText().toString();
             String eventNotesInput = eventNotes.getText().toString();
 
             Calendar cal = Calendar.getInstance(Locale.US);
@@ -268,4 +291,13 @@ public class NewEventDialog extends BottomSheetDialogFragment {
             ((DialogCloseListener)activity).handleDialogClose(dialog);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

@@ -14,22 +14,26 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:hint="@string/dog_name_hint" />
 
-    <EditText
-        android:id="@+id/eventTypeEditText"
+
+    <Spinner
+        android:id="@+id/staticSpinner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/new_event_text_height"
+        android:layout_below="@id/dogNameEditText"
+        android:background="@android:drawable/btn_dropdown"
+        android:entries="@array/events_array"
+        android:hint="@string/event_type_hint"
         android:paddingStart="@dimen/new_event_text_paddingStart"
         android:paddingEnd="@dimen/new_event_text_paddingStart"
-        android:layout_below="@id/dogNameEditText"
-        android:background="@null"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="@string/event_type_hint" />
+        android:spinnerMode="dropdown"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
 
     <TextView
         android:id="@+id/eventDateTextView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/new_event_text_height"
-        android:layout_below="@id/eventTypeEditText"
+        android:layout_below="@id/staticSpinner"
         android:background="@null"
         android:hint="@string/event_date_hint"
         android:paddingStart="@dimen/new_event_text_paddingStart"
