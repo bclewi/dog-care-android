@@ -57,12 +57,13 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     private Button eventSaveButton;
     private AtomicBoolean
             hasDogName = new AtomicBoolean(false),
-            //hasEventType = new AtomicBoolean(false),
+            hasEventType = new AtomicBoolean(false),
             hasEventDate = new AtomicBoolean(false),
             hasEventTime = new AtomicBoolean(false);
 
     private DatabaseHelper db;
-   // private Spinner Spinner;
+
+
 
 
 
@@ -72,7 +73,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
 
-        //spinner = (Spinner)findViewById(R.id.staticSpinner);
+
 
     }
 
@@ -94,7 +95,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     }
 
     private void updateSaveButton() {
-        if (hasDogName.get() &&  hasEventDate.get() && hasEventTime.get()) {
+        if (hasDogName.get() && hasEventDate.get() && hasEventTime.get()) {
             eventSaveButton.setEnabled(true);
             eventSaveButton.setTextColor(ContextCompat.getColor(
                     Objects.requireNonNull(getContext()),
@@ -112,7 +113,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        // added the spinner class
         Spinner spinner = (Spinner) view.findViewById(R.id.staticSpinner);
 
 
@@ -132,8 +133,9 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
             String dogNameString = bundle.getString("dogName");
             dogName.setText(dogNameString);
             validateText(dogNameString, hasDogName);
-
-           // String eventTypeString = bundle.getString("eventType");
+            // commented out this to make it run as you cant get string from spinner with getstring
+            //
+           // String eventTypeString = spinner.getSelectedItem().toString();
            // eventType.setText(eventTypeString);
            // validateText(eventTypeString, hasEventType);
 
@@ -256,6 +258,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
         final boolean hasNewUpdateFinal = hasNewUpdate;
         eventSaveButton.setOnClickListener(v -> {
             String dogNameInput = dogName.getText().toString();
+            //below is the way to get the new string from the spinner to add to database
             String eventTypeInput  = spinner.getSelectedItem().toString();
             //String eventTypeInput = eventType.getText().toString();
             String eventNotesInput = eventNotes.getText().toString();
