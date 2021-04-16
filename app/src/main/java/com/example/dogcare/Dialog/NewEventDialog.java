@@ -47,13 +47,18 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     private TextView
             eventDateTextView,
             eventTimeTextView;
+    private Calendar cal = Calendar.getInstance(Locale.US);
+
+    // TODO: move instantiations to "SaveButton".onClickListener()
     private int
-            eventYear,
-            eventMonth,
-            eventDay,
-            eventHour,
-            eventMinute;
-    private long eventDateTime;
+            eventYear = cal.get(Calendar.YEAR),
+            eventMonth = cal.get(Calendar.MONTH),
+            eventDay = cal.get(Calendar.DAY_OF_MONTH),
+            eventHour = cal.get(Calendar.HOUR_OF_DAY),
+            eventMinute = cal.get(Calendar.MINUTE);
+    private long eventDateTime = cal.getTimeInMillis();
+    // TODO: ends here
+
     private Button eventSaveButton;
     private AtomicBoolean
             hasDogName = new AtomicBoolean(false),
@@ -95,7 +100,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     }
 
     private void updateSaveButton() {
-        if (hasDogName.get() && hasEventDate.get() && hasEventTime.get()) {
+        if (hasDogName.get()) {
             eventSaveButton.setEnabled(true);
             eventSaveButton.setTextColor(ContextCompat.getColor(
                     Objects.requireNonNull(getContext()),
@@ -256,6 +261,8 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
         });
 
         final boolean hasNewUpdateFinal = hasNewUpdate;
+
+
         eventSaveButton.setOnClickListener(v -> {
             String dogNameInput = dogName.getText().toString();
             //below is the way to get the new string from the spinner to add to database
