@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/eventsText"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="true"
+        />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

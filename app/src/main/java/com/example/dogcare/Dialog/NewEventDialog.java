@@ -47,13 +47,16 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     private TextView
             eventDateTextView,
             eventTimeTextView;
+   //private Calendar cal = Calendar.getInstance(Locale.US);
+
     private int
-            eventYear,
-            eventMonth,
-            eventDay,
-            eventHour,
-            eventMinute;
-    private long eventDateTime;
+    eventYear, eventMonth, eventDay, eventHour, eventMinute;
+
+
+private long eventDateTime;
+
+
+
     private Button eventSaveButton;
     private AtomicBoolean
             hasDogName = new AtomicBoolean(false),
@@ -65,6 +68,12 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
 
 
 
+boolean isDatePicked = false;
+boolean isTimePicked = false;
+
+
+
+
 
 
 
@@ -72,6 +81,9 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, R.style.DialogStyle);
+
+
+
 
 
 
@@ -95,7 +107,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
     }
 
     private void updateSaveButton() {
-        if (hasDogName.get() && hasEventDate.get() && hasEventTime.get()) {
+        if (hasDogName.get()) {
             eventSaveButton.setEnabled(true);
             eventSaveButton.setTextColor(ContextCompat.getColor(
                     Objects.requireNonNull(getContext()),
@@ -202,6 +214,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
             int currYear = cal.get(Calendar.YEAR);
             int currMonth = cal.get(Calendar.MONTH); // DatePicker(currMonth) and Calender.MONTH are both 0 indexed
             int currDay = cal.get(Calendar.DAY_OF_MONTH);
+            //if below is empty only do above and give them right now
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(
                     getContext(),
@@ -221,8 +234,9 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
 
                         validateText(datePickedText, hasEventDate);
                         updateSaveButton();
+                        isDatePicked = true;
                     },
-                    // set datePickerDialog to initially show the current date selected
+                    // set datePickerDialog to initially show the date selected
                     currYear, currMonth, currDay);
             datePickerDialog.show();
 
@@ -249,6 +263,7 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
 
                         validateText(timePickedText, hasEventTime);
                         updateSaveButton();
+                        isTimePicked = true;
                     },
                     currHour, currMinute, false);
             timePickerDialog.show();
@@ -256,6 +271,10 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
         });
 
         final boolean hasNewUpdateFinal = hasNewUpdate;
+
+
+
+
         eventSaveButton.setOnClickListener(v -> {
             String dogNameInput = dogName.getText().toString();
             //below is the way to get the new string from the spinner to add to database
@@ -264,8 +283,27 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
             String eventNotesInput = eventNotes.getText().toString();
 
             Calendar cal = Calendar.getInstance(Locale.US);
+
+
+
+
+            if (isDatePicked == false) {
+                eventYear = cal.get(Calendar.YEAR);
+                eventMonth = cal.get(Calendar.MONTH);
+                eventDay = cal.get(Calendar.DAY_OF_MONTH);
+
+            }
+
+
+            if (isTimePicked == false) {
+                eventHour = cal.get(Calendar.HOUR_OF_DAY);
+                eventMinute = cal.get(Calendar.MINUTE);
+            }
+
+
             cal.set(eventYear, eventMonth, eventDay, eventHour, eventMinute);
             eventDateTime = cal.getTimeInMillis();
+
             if (hasNewUpdateFinal) { // if event update?
                 db.updateName(bundle.getInt("id"), dogNameInput);
                 db.updateType(bundle.getInt("id"), eventTypeInput);
@@ -278,6 +316,10 @@ public class NewEventDialog extends BottomSheetDialogFragment implements Adapter
                 event.setDateTime(eventDateTime);
                 event.setNotes(eventNotesInput);
                 db.insertEvent(event);
+
+
+
+
             }
             dismiss();
         });
