@@ -36,6 +36,7 @@
         android:layout_below="@id/staticSpinner"
         android:background="@null"
         android:hint="@string/event_date_hint"
+        android:textColorHint="@color/black"
         android:paddingStart="@dimen/new_event_text_paddingStart"
         android:paddingEnd="@dimen/new_event_text_paddingStart"
         android:paddingTop="@dimen/new_event_text_paddingTop"
@@ -51,7 +52,9 @@
         android:layout_below="@id/eventDateTextView"
         android:background="@null"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="@string/event_time_hint" />
+        android:hint="@string/event_time_hint"
+        android:textColorHint="@color/black"
+        />
 
     <EditText
         android:id="@+id/eventNotesEditText"

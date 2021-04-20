@@ -109,13 +109,13 @@ public class EventModel {
         cal.setTimeInMillis(dateTime);
         Date date = cal.getTime();
         if (isToday(date)) {
-            return " today";
+            return " Today";
         }
         if (isWithinDaysPast(date, 1)) {
-            return " yesterday";
+            return " Yesterday";
         }
         if (isWithinDaysPast(date, 2)) {
-            return " two days ago";
+            return " Two Days Ago";
         }
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         return " on "+sdf.format(date);

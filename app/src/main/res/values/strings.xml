@@ -7,13 +7,13 @@
     <string name="save">Save</string>
     <string name="dog_name_hint">Dog Name</string>
     <string name="event_type_hint">Event</string>
-    <string name="event_date_hint">Date</string>
-    <string name="event_time_hint">Time</string>
+    <string name="event_date_hint">Today</string>
+    <string name="event_time_hint">Now</string>
     <string name="event_notes_hint">Notes (Optional)</string>\
     <string-array name="events_array">
         <item>Pooped</item>
         <item>Peed</item>
         <item>Walked</item>
-        <item>Fed</item>
+        <item>Ate</item>
     </string-array>
 </resources>
